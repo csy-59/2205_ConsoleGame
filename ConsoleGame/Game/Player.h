@@ -11,6 +11,8 @@ typedef struct tagPlayer
 	COORD	Coord;
 	Gun		YellowGun;
 	Gun		MagentaGun;
+	float	MaxShootSpeed;
+	float	ShootSpeed;
 } Player;
 
 void Player_Init(Player* player);

@@ -10,6 +10,8 @@ void Player_Init(Player* player)
 	SetCoord(player->Coord, 0, 0);
 	Gun_Init(&player->YellowGun, TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
 	Gun_Init(&player->MagentaGun, TEXT_COLOR_MAGENTA | TEXT_COLOR_STRONG);
+	player->MaxShootSpeed = 0.3f;
+	player->ShootSpeed = 0.0f;
 }
 
 void Player_Update(Player* player)
@@ -40,13 +42,19 @@ void Player_Update(Player* player)
 		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y);
 	}
 	*/
+	if (player->ShootSpeed <= 0) {
+		if (Input_GetKey(VK_NUMPAD1)) {
+			Gun_Shoot(&player->YellowGun, player->Coord.X + 1, player->Coord.Y);
+			player->ShootSpeed = player->MaxShootSpeed;
+		}
 
-	if (Input_GetKey(VK_NUMPAD1)) {
-		Gun_Shoot(&player->YellowGun, player->Coord.X + 1, player->Coord.Y);
+		if (Input_GetKey(VK_NUMPAD2)) {
+			Gun_Shoot(&player->MagentaGun, player->Coord.X + 1, player->Coord.Y);
+			player->ShootSpeed = player->MaxShootSpeed;
+		}
 	}
-
-	if (Input_GetKey(VK_NUMPAD2)) {
-		Gun_Shoot(&player->MagentaGun, player->Coord.X + 1, player->Coord.Y);
+	else {
+		player->ShootSpeed -= DELTA_TIME;
 	}
 
 	Gun_Update(&player->YellowGun);
