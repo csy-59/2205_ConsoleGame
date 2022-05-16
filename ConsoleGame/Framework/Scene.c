@@ -32,7 +32,7 @@ void reset_title(TitleSceneData* data)
 
 	setCoord(&data->TitleCoords[0], 10, 0);
 	setCoord(&data->TitleCoords[1], 25, 10);
-	setCoord(&data->TitleCoords[2], 35, 20);
+	setCoord(&(data->TitleCoords[2]), 35, 20);
 }
 
 void init_title(void)
@@ -86,6 +86,10 @@ void update_title(void)
 
 	if (Input_GetKeyDown('Q'))
 	{
+		Scene_SetNextScene(SCENE_GAMEOVER);
+	}
+
+	if (Input_GetKeyDown('W')) {
 		Scene_SetNextScene(SCENE_LEESEUNGIL);
 	}
 }
@@ -205,6 +209,45 @@ void release_leeseungil(void)
 
 #pragma endregion
 
+#pragma region GameOver
+
+#include "Game/GameOver.h"
+
+typedef struct tagGameOverSceneData {
+	GameOver GameOver;
+} GameOverSceneData;
+
+void init_gameover(void) {
+	g_Scene.Data = malloc(sizeof(GameOverSceneData));
+
+	GameOverSceneData* data = (GameOverSceneData*)g_Scene.Data;
+
+	GameOver_Init(&data->GameOver);
+}
+
+void update_gameover(void) {
+	GameOverSceneData* data = (GameOverSceneData*)g_Scene.Data;
+
+	GameOver_Update(&data->GameOver);
+}
+
+void render_gameover(void) {
+	GameOverSceneData* data = (GameOverSceneData*)g_Scene.Data;
+
+	GameOver_Render(&data->GameOver);
+}
+
+void release_gameover(void) {
+	GameOverSceneData* data = (GameOverSceneData*)g_Scene.Data;
+
+	GameOver_Release(&data->GameOver);
+
+	SafeFree(g_Scene.Data);
+}
+
+
+#pragma endregion
+
 bool Scene_IsSetNextScene(void)
 {
 	if (SCENE_NULL == s_nextScene)
@@ -253,6 +296,12 @@ void Scene_Change(void)
 		g_Scene.Update = update_leeseungil;
 		g_Scene.Render = render_leeseungil;
 		g_Scene.Release = release_leeseungil;
+		break;
+	case SCENE_GAMEOVER:
+		g_Scene.Init = init_gameover;
+		g_Scene.Update = update_gameover;
+		g_Scene.Render = render_gameover;
+		g_Scene.Release = release_gameover;
 		break;
 	}
 

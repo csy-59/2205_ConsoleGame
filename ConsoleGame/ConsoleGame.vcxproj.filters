@@ -44,6 +44,12 @@
     <ClCompile Include="Framework\Scene.c">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Enemy.c">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameOver.c">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\App.h">
@@ -78,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Scene.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemy.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameOver.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

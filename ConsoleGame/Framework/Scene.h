@@ -17,6 +17,7 @@ typedef enum tagSceneType
 	SCENE_TITLE,
 	SCENE_MAIN,
 	SCENE_LEESEUNGIL,
+	SCENE_GAMEOVER,
 	SCENE_RESULT,
 	SCENE_MAX
 } ESceneType;

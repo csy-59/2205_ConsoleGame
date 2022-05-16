@@ -3,6 +3,7 @@
 #include "Framework/Input.h"
 #include "Framework/Renderer.h"
 #include "Framework/Timer.h"
+#include "Framework/Scene.h"
 
 void Player_Init(Player* player)
 {
@@ -12,6 +13,8 @@ void Player_Init(Player* player)
 	Gun_Init(&player->MagentaGun, TEXT_COLOR_MAGENTA | TEXT_COLOR_STRONG);
 	player->MaxShootSpeed = 0.3f;
 	player->ShootSpeed = 0.0f;
+
+	Enemy_Init(&player->Enemy);
 }
 
 void Player_Update(Player* player)
@@ -59,6 +62,11 @@ void Player_Update(Player* player)
 
 	Gun_Update(&player->YellowGun);
 	Gun_Update(&player->MagentaGun);
+	Enemy_Update(&player->Enemy, player->Coord);
+
+	if (player->Coord.X == player->Enemy.Coord.X && player->Coord.Y == player->Enemy.Coord.Y) {
+		Player_Die(player);
+	}
 }
 
 void Player_Render(Player* player)
@@ -74,4 +82,8 @@ void Player_Release(Player* player)
 {
 	Gun_Release(&player->YellowGun);
 	Gun_Release(&player->MagentaGun);
+}
+
+void Player_Die(Player* player) {
+	Scene_SetNextScene(SCENE_GAMEOVER);
 }
