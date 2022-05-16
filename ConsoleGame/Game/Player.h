@@ -9,7 +9,8 @@ typedef struct tagPlayer
 {
 	Text	Text;
 	COORD	Coord;
-	Gun		Gun;
+	Gun		YellowGun;
+	Gun		MagentaGun;
 } Player;
 
 void Player_Init(Player* player);

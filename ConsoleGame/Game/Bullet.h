@@ -14,8 +14,8 @@ typedef struct tagBullet
 	float	Speed;
 } Bullet;
 
-void Bullet_Init(Bullet* bullet, struct tagGun* gun);
+void Bullet_Init(Bullet* bullet, struct tagGun* gun, WORD color);
 void Bullet_Update(Bullet* bullet);
 void Bullet_Render(Bullet* bullet);
 void Bullet_Release(Bullet* bullet);
-void Bullet_Spawn(Bullet* bullet, int32 x, int32 y, WORD color);
+void Bullet_Spawn(Bullet* bullet, int32 x, int32 y);

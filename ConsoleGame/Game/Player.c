@@ -2,12 +2,14 @@
 
 #include "Framework/Input.h"
 #include "Framework/Renderer.h"
+#include "Framework/Timer.h"
 
 void Player_Init(Player* player)
 {
 	TextCopyWithWhite(&player->Text, L"P");
 	SetCoord(player->Coord, 0, 0);
-	Gun_Init(&player->Gun);
+	Gun_Init(&player->YellowGun, TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
+	Gun_Init(&player->MagentaGun, TEXT_COLOR_MAGENTA | TEXT_COLOR_STRONG);
 }
 
 void Player_Update(Player* player)
@@ -40,14 +42,15 @@ void Player_Update(Player* player)
 	*/
 
 	if (Input_GetKey(VK_NUMPAD1)) {
-		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y, TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
+		Gun_Shoot(&player->YellowGun, player->Coord.X + 1, player->Coord.Y);
 	}
 
 	if (Input_GetKey(VK_NUMPAD2)) {
-		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y, TEXT_COLOR_MAGENTA |TEXT_COLOR_STRONG);
+		Gun_Shoot(&player->MagentaGun, player->Coord.X + 1, player->Coord.Y);
 	}
 
-	Gun_Update(&player->Gun);
+	Gun_Update(&player->YellowGun);
+	Gun_Update(&player->MagentaGun);
 }
 
 void Player_Render(Player* player)
@@ -55,10 +58,12 @@ void Player_Render(Player* player)
 	Text* text = &player->Text;
 	Renderer_DrawText(text, 1, player->Coord.X, player->Coord.Y);
 
-	Gun_Render(&player->Gun);
+	Gun_Render(&player->YellowGun);
+	Gun_Render(&player->MagentaGun);
 }
 
 void Player_Release(Player* player)
 {
-	Gun_Release(&player->Gun);
+	Gun_Release(&player->YellowGun);
+	Gun_Release(&player->MagentaGun);
 }

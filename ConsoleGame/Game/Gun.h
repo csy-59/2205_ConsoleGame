@@ -13,8 +13,8 @@ typedef struct tagGun
 	Bullet	Bullet[MAX_BULLET_COUNT];
 } Gun;
 
-void Gun_Init(Gun* gun);
+void Gun_Init(Gun* gun, WORD color);
 void Gun_Update(Gun* gun);
 void Gun_Render(Gun* gun);
 void Gun_Release(Gun* gun);
-void Gun_Shoot(Gun* gun, int32 x, int32 y, WORD color);
+void Gun_Shoot(Gun* gun, int32 x, int32 y);

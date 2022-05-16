@@ -1,10 +1,10 @@
 #include "Gun.h"
 
-void Gun_Init(Gun* gun)
+void Gun_Init(Gun* gun, WORD color)
 {
 	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
 	{
-		Bullet_Init(&gun->Bullet[i], gun);
+		Bullet_Init(&gun->Bullet[i], gun, color);
 	}
 	gun->BulletCount = 0;
 }

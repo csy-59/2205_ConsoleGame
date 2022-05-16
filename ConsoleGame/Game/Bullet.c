@@ -4,13 +4,13 @@
 #include "Framework/Renderer.h"
 #include "Framework/Timer.h"
 
-void Bullet_Init(Bullet* bullet, struct tagGun* gun)
+void Bullet_Init(Bullet* bullet, struct tagGun* gun, WORD color)
 {
 	SetCoord(bullet->Coord, 0, 0);
 	bullet->ElapsedTimeForMove = 0.0f;
 	bullet->IsActive = false;
 	bullet->ActiveTime = 3.0f;
-	TextCopy(&bullet->Text, L"¡Û", TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
+	TextCopy(&bullet->Text, L"¡Û", color);
 	bullet->Gun = gun;
 	bullet->Speed = 100.0f;
 }
@@ -59,10 +59,9 @@ void Bullet_Release(Bullet* bullet)
 
 }
 
-void Bullet_Spawn(Bullet* bullet, int32 x, int32 y, WORD color)
+void Bullet_Spawn(Bullet* bullet, int32 x, int32 y)
 {
 	bullet->IsActive = true;
 	bullet->Coord.X = x;
 	bullet->Coord.Y = y;
-	bullet->Text.Attributes = color;
 }
